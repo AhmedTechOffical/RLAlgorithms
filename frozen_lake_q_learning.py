@@ -1,11 +1,11 @@
 import gym
 import matplotlib.pyplot as plt
 import numpy as np
-from TDL import Agent 
+from qlearning import Agent 
 
 if __name__ == "__main__":
     env = gym.make("FrozenLake-v1")
-    agent = Agent(lr=0.001, gamma=0.9, eps_start=1.0, eps_end=0.01, eps_dec=0.9999995, n_actions=4,n_states=16)
+    agent = Agent(lr=0.001, eps_start=1,eps_end=0,eps_dec=0.9999995,no_states=16,no_actions=4,gamma=0.9)
 
     scores = []
     win_pct_list = []
@@ -29,6 +29,6 @@ if __name__ == "__main__":
             win_pct = np.mean(scores[-100:])
             win_pct_list.append(win_pct)
             if i % 1000 ==0:
-                print("episode", i , "win pct %.2f" % win_pct, "epsilon %2.f" % agent.epsilon)
+                print("episode", i , "win pct %.2f" % win_pct, "epsilon %2.f" % agent.eps_start)
     plt.plot(win_pct_list)
     plt.show() 
