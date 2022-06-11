@@ -61,10 +61,10 @@ class Agent():
         return action
     
     def decrement_epsilon(self):
-        if self.epsilon > self.eps_end:
-            self.epsilon = self.epsilon - self.eps_dec
+        if self.epsilon > self.eps_end and self.epsilon > 0:
+            self.epsilon = self.epsilon * self.eps_dec
         else:
-            self.epsilon = self.eps_end
+            self.epsilon = self.epsilon*self.eps_dec
 
     def learn(self,state,action,reward,state_):
         state_tensor = torch.tensor(state,dtype=torch.float).to(self.Q.device)
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     n_games = 10000
     scores = []
     eps_history = []
-    agent = Agent(lr=0.001,eps_start=1.0,eps_end=0.1,eps_dec=0.99,gamma=0.9,input_dim=env.observation_space.shape,n_actions=env.action_space.n)
+    agent = Agent(lr=0.001,eps_start=1.0,eps_end=0.1,eps_dec=0.999995,gamma=0.9,input_dim=env.observation_space.shape,n_actions=env.action_space.n)
     observation = env.reset()
 
     for episode in range(n_games):
