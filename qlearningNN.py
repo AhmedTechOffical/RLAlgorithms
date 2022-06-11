@@ -39,7 +39,7 @@ class Agent():
         self.no_states = no_states
         self.lr = lr
 
-        self.action_space = [i for i in range(self.no_actions)]
+        #self.action_space = [i for i in range(no_actions)]
 
         self.Q = Network(self.no_states,self.no_actions)
 
@@ -91,7 +91,7 @@ class Agent():
 
 if __name__ == "__main__":
     env = gym.make("CartPole-v1")
-    agent = Agent(lr=0.9 ,gamma = 0.9, eps_start = 1.0, eps_end = 0.1, eps_dec=0.995,no_actions=env.action_space,no_states=env.observation_space)
+    agent = Agent(lr=0.9 ,gamma = 0.9, eps_start = 1.0, eps_end = 0.1, eps_dec=0.995,no_actions=env.action_space,no_states=env.observation_space.shape)
     observation = env.reset()
 
     no_of_games = 0
